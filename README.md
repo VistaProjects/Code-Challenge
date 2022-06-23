@@ -45,13 +45,13 @@ Result is:
 ```php
 $a = 10;
 $b = 20:
-echo $a . †
+echo $a .
 echo $b;
 //on the screen is now shown: 10 20
 
 //here your piece of code and then the result is;
 
-echo $a . †
+echo $a .
 echo $b;
 // the screen now shows: 20 10
 ```
