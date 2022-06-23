@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 10 Hanoi (6 punten)
+		// Maak een applicatie die de torens van hanoi speelt. Maak een simpele gebruikersinterface (hoeft niet grafisch).
+		let tower1 = [3,2,1];
+		let tower2 = []
+		let tower3 = []
+		
+		console.clear()
+		let checkTowers = () => {
+			console.log('tower1', "#".repeat(tower1.length))
+			console.log('tower2', "#".repeat(tower2.length))
+			console.log('tower3', "#".repeat(tower3.length))
+			console.log('\n')
+		}
+		checkTowers()
+
+
+		let move = function(from, to) {
+			let top = from.pop()
+			to.push(top)
+			checkTowers()
+		}
+
+		let solve = [
+			[tower1, tower2],
+			[tower1, tower3],
+			[tower2, tower3],
+			[tower1, tower2],
+			[tower3, tower1],
+			[tower3, tower2],
+			[tower1, tower2],
+		]
+		solve.forEach((answer, index) => {
+			index += 1
+			// console.log(answer)
+			setTimeout(()=> {
+				move(...answer)
+			}, index * 750)
+		})
+		
+		setTimeout(()=> {
+				console.log('Done!')
+		}, solve.length * 750)
+
+		// move(tower1, tower2)
+		// move(tower1, tower3)
+		// move(tower2, tower3)
+		// move(tower1, tower2)
+		// move(tower3, tower1)
+		// move(tower3, tower2)
+		// move(tower1, tower2)
+
+
+
+
+	</script>
+</body>
+</html>

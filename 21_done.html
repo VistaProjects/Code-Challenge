@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.blok {
+			width: 60px;
+			height: 20px;
+			background-color: red;
+			margin: 5px;
+			float: left;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Bouw een muur</h1>
+	<label for="">Totaal stenen</label>
+	<input type="text" name="" id="stenen">
+
+	<label for="">Lengte in meters</label>
+	<input type="text" name="" id="meter">
+
+	<button onclick="bereken()">Bereken</button><br>
+
+	<label for="" id="text">Jou muur: 0 stenen</label>
+	<div id="muur"></div>
+
+	<script>
+		let muur = document.getElementById('muur')
+		let text = document.getElementById('text')
+		let bereken = () => {
+				muur.innerHTML = ""
+			
+				let stenen = document.getElementById('stenen').value;
+				let meter = document.getElementById('meter').value;
+				let totaal = stenen / meter;
+
+				text.innerHTML = `Jou muur: ${totaal} stenen`
+
+				for (let index = 0; index < totaal; index++) {
+					// Now create and append to iDiv
+					var innerDiv = document.createElement('div');
+					innerDiv.className = 'blok';
+
+					// The variable iDiv is still good... Just append to it.
+					muur.appendChild(innerDiv);
+			}
+		}
+	</script>
+</body>
+</html>

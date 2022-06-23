@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<table id="table">
+		<tr>
+		  <th>Achternaam</td>
+		  <th>Nummer</th>
+		  <th>email</th>
+		</tr>
+	  </table>
+	<script>
+		// 6) Zet een tweedimensionele array in een tabel (4 punten)
+		// De array $lijst bevat 5 adressen met  elk de achternaam, telefoonnummer en mailadres. De opdracht is om deze array met een onbepaald aantal regels om te zetten in een HTML tabel.
+
+		// https://www.w3schools.com/html/html_tables.asp
+
+		var items = [
+			["Hans", "123456789", "test1@gmail.com"],
+			["Jan", "346436455", "test2@gmail.com"],
+			["Kaas", "456456546", "test3@gmail.com"],
+			["geladen", "345384544", "test4@gmail.com"],
+			["Kaas", "3242423424", "test5@gmail.com"],
+		];
+
+		var table = document.getElementById("table");
+
+		items.forEach((item, i)  => {
+			console.log(item, i)
+			var row = table.insertRow(i + 1);
+			row.insertCell(0).innerHTML = item[0];
+			row.insertCell(1).innerHTML = item[1];
+			row.insertCell(2).innerHTML = item[2];
+		})
+	</script>
+</body>
+</html>

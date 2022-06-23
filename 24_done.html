@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			background: linear-gradient(180deg, #f7b009, white);
+		}
+	</style>
+</head>
+<body>
+	<h1>Brievengenerator</h1>
+	<pre>
+Beste {firstname} {lastname},
+Met Groote genoegen mag ik jou, {yourfullname}, op de hoogte stellen dat jij uitverkoren bent om mee te dingen naar de speciale prijs voor {activity}.
+
+Daarom nodig ik je uit om op {date} om {time} uur samen met {yourfriend} te verschijnen op de locatie: {location}.
+
+Vergeet niet om {dontforget}.
+We zien graag binnenkort.
+
+Met vriendelijke groet,
+{sendername}
+	</pre>
+
+	<label for="firstname">Voornaam</label>
+	<input type="text" name="firstname" id="firstname"><br>
+
+	<label for="lastname">Achternaam</label>
+	<input type="text" name="lastname" id="lastname"><br>
+
+	<label for="yourfullname">Uw volledige naam</label>
+	<input type="text" name="yourfullname" id="yourfullname"><br>
+
+	<label for="activity">Activiteit</label>
+	<input type="text" name="activity" id="activity"><br>
+
+	<label for="date">Datum</label>
+	<input type="date" name="date" id="date"><br>
+
+	<label for="time">Tijd</label>
+	<input type="time" name="time" id="time"><br>
+
+	<label for="friendname">Naam van vriend</label>
+	<input type="text" name="friendname" id="friendname"><br>
+
+	<label for="location">Locatie</label>
+	<input type="text" name="location" id="location"><br>
+
+	<label for="dontforget">Niet vergeten</label>
+	<input type="text" name="dontforget" id="dontforget"><br>
+
+	<label for="dontforget">dingen om mee te nemen</label>
+	<input type="text" name="dontforget" id="dontforget"><br>
+
+	<label for="afzender">Naam afzender</label>
+	<input type="text" name="afzender" id="afzender"><br>
+
+	<button onclick="make()"  type="submit">Verstuur</button><br>
+
+	<textarea name="" id="brief" cols="100" rows="15">Brief hier</textarea>
+
+	<script>
+		let make = () => {
+			let firstname = document.getElementById('firstname').value;
+			let lastname = document.getElementById('lastname').value;
+			let yourfullname = document.getElementById('yourfullname').value;
+			let activity = document.getElementById('activity').value;
+			let date = document.getElementById('date').value;
+			let time = document.getElementById('time').value;
+			let friendname = document.getElementById('friendname').value;
+			let location = document.getElementById('location').value;
+			let dontforget = document.getElementById('dontforget').value;
+			let afzender = document.getElementById('afzender').value;
+
+			// set brief id to text hey
+			document.getElementById('brief').textContent = `Beste ${firstname} ${lastname},
+Met Groote genoegen mag ik jou, ${yourfullname}, op de hoogte stellen dat jij uitverkoren bent om mee te dingen naar de speciale prijs voor ${activity}.
+
+Daarom nodig ik je uit om op ${date} om ${time} uur samen met ${friendname} te verschijnen op de locatie: ${location}.
+
+Vergeet niet om ${dontforget}.
+We zien graag binnenkort.
+
+Met vriendelijke groet,
+${afzender}`
+
+		}
+
+	</script>
+
+</body>
+</html>

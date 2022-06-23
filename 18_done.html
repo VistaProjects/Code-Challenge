@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<button onclick="Name()">Willekeurige naam</button>
+	<h1 id="naam"></h1>
+	<script>
+		// https://www.youtube.com/watch?v=58eJai83oT4
+		// 18 Namengenerator (5 punten)
+
+		let namen = [ 
+			"jos",
+			"KlaAs",
+			"jan",
+			"Piet",
+			"Hans",
+			"kEEs",
+			"PeTer",
+			"JohaN",
+			"PieTerTje"
+		]
+
+		
+		let Name = () => {
+			let naam = namen[Math.floor(Math.random() * namen.length)]
+	
+			// console.log(`${naam[0].toUpperCase() + naam.slice(1).toLowerCase()}`)
+			document.getElementById("naam").innerText = `${naam[0].toUpperCase() + naam.slice(1).toLowerCase()}`
+		}
+	</script>
+</body>
+</html>

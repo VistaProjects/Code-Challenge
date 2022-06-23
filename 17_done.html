@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		span,#win {
+			color: green;
+			font-weight: bold;
+
+		}
+		span,#lose {
+			color: red;
+			font-weight: normal;
+		}
+		span,#profit {
+			color: blue;
+			font-weight: bold;
+		}
+	</style>
+</head>	
+<body>
+	<h1>Speel roulette</h1>
+	<h2 >Balance:</h2>
+	<h2 id="balance">0</h2>
+	<h2>
+
+		<span>Winst</span>
+		<span id="profit">0</span>
+	</h2>
+
+	<label for="">Aantal keer spelen</label>
+	<input type="text" name="" id="amount_play" value="5" ></input><br>
+	
+
+	<input type="radio" id="rood" name="keuze" value="1" checked>rood</input>
+	<input type="radio" id="zwart" name="keuze" value="2">zwart</input><br><br>
+
+	<label for="">Inzetten</label>
+	<input type="text" name="" id="inzetbedrag" value="100" ></input><br><br>
+	
+	<label for="">Kies nummer</label>
+	<select name="dropdown" id="dropdown">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+		<option value="31">31</option>
+		<option value="32">32</option>
+		<option value="33">33</option>
+		<option value="34">34</option>
+		<option value="35">35</option>
+		<option value="36">36</option>
+	</select><br><br>
+
+		<button onclick="Spelen()">Spelen</button>
+		<hr>
+		<pre id="output"></pre>
+
+
+	<script>
+		// Als kleur goed is 200 euro bonus
+		// Als nummer goed is inzet * 14
+
+
+		var counter = 0
+
+		var output_html = []
+		let UpdateOutput = () =>{
+			var string = ''
+			if (output_html.length >= 30){
+				output_html.shift()
+				output_html.forEach(element => {
+					string += element
+				});
+				document.getElementById('output').innerHTML = string
+			}
+		}
+
+		// output_html.push(`<p style="color: #ff0000">${text}${args}</p>`)
+		// $("#output").append(`<p style="color: #ff0000">${text}${args}</p>`);
+
+
+
+
+		let balance = document.getElementById('balance');
+		let profit = document.getElementById('profit');
+		
+		let output = document.getElementById('output');
+
+
+		balance.innerHTML = 10000
+		
+		let Spelen = () => {
+
+			let keuze = document.getElementById('dropdown').value;
+			let keer_spelen = document.getElementById('amount_play').value;
+			let inzetbedrag = document.getElementById('inzetbedrag');
+			
+			let rood = document.getElementById('rood').checked;
+			let zwart = document.getElementById('zwart').checked;
+			// Number from 1-36 random
+			
+
+			for (let i = 0; i < keer_spelen; i++) {
+				counter++
+			
+				
+
+				if (Number(balance.innerHTML) < 0){
+					alert('Je geen geld om te spelen')
+					return
+				}
+				// Need fix
+				balance.innerHTML = Number(balance.innerHTML) - Number(inzetbedrag.value)
+
+				let win_getal = Math.floor(Math.random() * 37);
+				let color = Math.random() > 0.5 ? 'rood' : 'zwart';
+
+
+				if (color == 'zwart' && zwart || color == 'rood' && rood){
+					profit.innerHTML = Number(profit.innerHTML) + Number(inzetbedrag.value * 1.25) 
+					balance.innerHTML = Number(balance.innerHTML) + Number(inzetbedrag.value * 1.25)
+				}
+
+				// Update the output
+				UpdateOutput()
+
+				if (win_getal == keuze){
+					profit.innerHTML = Number(profit.innerHTML) + Number(inzetbedrag.value * 14) 
+					balance.innerHTML = Number(balance.innerHTML) + Number(inzetbedrag.value * 14)
+					let text
+					if (color == 'zwart' && zwart || color == 'rood' && rood){
+						text = `<span id="profit">#${counter} Gewonnen! jou nummer was ${keuze} en de computer koos ${win_getal} en de kleur was goed</span>\n`
+					}
+					else
+					{
+						text = `<span id="win">#${counter} Gewonnen! jou nummer was ${keuze} en de computer koos ${win_getal} maar de kleur was niet goed</span>\n`
+					}
+
+					output_html.push(text)
+					output.innerHTML += text;
+				}
+				else {
+					profit.innerHTML = Number(profit.innerHTML) - Number(inzetbedrag.value)
+					
+					let text
+					if (color == 'zwart' && zwart || color == 'rood' && rood){
+						text = `<span id="lose">#${counter} Gelijk! jou nummer was ${keuze} en de computer koos ${win_getal} maar de <span id="win">kleur was wel goed</span></span>\n`
+					}
+					else
+					{
+						text = `<span id="lose">#${counter} Verloren! jou nummer was ${keuze} en de computer koos ${win_getal} en de kleur was niet goed</span>\n`
+					}
+					output_html.push(text)
+					output.innerHTML += text;
+				}
+			}
+		}
+
+	</script>
+</body>
+</html>

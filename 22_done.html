@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			background-color: #6e6e6e;
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+			border: 2px solid black;
+
+		}
+		.item-a { background-color: green; }
+		.item-b { background-color: red; }
+		.item-c { background-color: yellow; }
+		.item-d { background-color: purple; }
+		.item-e { background-color: grey }
+		.item-f { background-color: orange; }
+		.item-g { background-color: blue; }
+		.item-h { background-color: brown; }
+
+		.container1, .container2 {
+			display: grid;
+			grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px;
+			column-gap: 10px;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Volg de kleuren</h1>
+	<button onclick="start()">Start</button>
+	<button onclick="next()">Volgende</button>
+	<!-- <button>stop</button> -->
+	<h3 id="ronde">Ronde: 1</h3><br><br>
+
+	<div class="container1">
+		<div class="box a">a</div>
+		<div class="box b">b</div>
+		<div class="box c">c</div>
+		<div class="box d">d</div>
+		<div class="box e">e</div>
+		<div class="box f">f</div>
+		<div class="box g">g</div>
+		<div class="box h">h</div>
+	</div>
+	<br>
+	<div class="container2">
+		<div class="item-a box" onclick="set('a')"></div>
+		<div class="item-b box" onclick="set('b')"></div>
+		<div class="item-c box" onclick="set('c')"></div>
+		<div class="item-d box" onclick="set('d')"></div>
+		<div class="item-e box" onclick="set('e')"></div>
+		<div class="item-f box" onclick="set('f')"></div>
+		<div class="item-g box" onclick="set('g')"></div>
+		<div class="item-h box" onclick="set('h')"></div>
+	</div>
+	<script>
+		var randomNumber, current, items
+		var ronde = 1;
+
+		var colors = {
+			a: "green",
+			b: "red",
+			c: "yellow",
+			d: "purple",
+			e: "grey",
+			f: "orange",
+			g: "blue",
+			h: "brown",
+		}
+		// Select random color
+		let randomColor = () => {
+			var keys = Object.keys(colors);
+			var random = keys[Math.floor(Math.random() * keys.length)];
+			return random;
+		}
+		
+		let start = () => {
+			next()
+		}
+
+		let animation = (array) => {
+			items = []
+			// setTimeout(animation, 1000);
+			array.forEach((e, index) => {
+				var keys = Object.keys(colors);
+				var random = keys[Math.floor(Math.random() * keys.length)];
+	
+				var box = document.querySelector(`.${random}`);
+				box.style.backgroundColor = colors[random];
+
+				setTimeout(()=> {
+					items.push(random)
+					console.log(items)
+					var box = document.querySelector(`.${random}`);
+					box.style.backgroundColor = '#6d6d6d';
+					box.style.content = index
+				}, 1500)
+			})
+		}
+
+		let next = () => {
+			document.querySelector(`#ronde`).innerHTML = `Ronde: ${ronde}`
+			
+			Object.keys(colors).forEach(item => {
+				var box = document.querySelector(`.${item}`);
+				box.style.backgroundColor = 'transparent';
+			})
+
+
+			ronde++
+			for (let index = 0; index < ronde; index++) {
+				randomNumber = Array.from({length: index}, () => randomColor());
+			}
+			animation(randomNumber) // [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' ]
+		}
+
+		let set = letter => {
+
+			if (!items.includes(letter)) {
+				alert('Game over')
+				location.reload();
+			}
+
+
+			let item = document.querySelector(`.${letter}`);
+			item.style.backgroundColor = colors[letter];
+		}
+	</script>
+</body>
+</html>
